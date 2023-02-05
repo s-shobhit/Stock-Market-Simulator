@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <main class="container py-5 text-center">
+        <table class="table tablestriped">
+            <thead>
+                <tr>
+                    <th class="text-start">Symbol</th>
+                    <th class="text-start">Name</th>
+                    <th class="text-end">Shares</th>
+                    <th class="text-end">Price</th>
+                    <th class="text-end">TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in stocks %}
+                <tr>
+                    <td class="text-start">{{ stock.symbol }}</td>
+                    <td class="text-start">{{ stock.stock_name }}</td>
+                    <td class="text-end">{{ stock.shares }}</td>
+                    <td class="text-end">{{ usd(stock.price) }}</td>
+                    <td class="text-end">{{ usd(stock.price * stock.shares) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                    <td class="border-0 text-end">{{ usd(cash) }}</td>
+                </tr>
+                <tr>
+                    <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
+                    <td class="border-0 w-bold text-end">{{ usd(grand_total) }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </main>
+{% endblock %}
